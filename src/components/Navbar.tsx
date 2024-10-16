@@ -1,17 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, MouseEvent, ReactNode } from 'react';
 
-export const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+export const Navbar: React.FC = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleMenu = (): void => setIsOpen(!isOpen);
 
-  const NavLink = ({ href, children }) => (
+  interface NavLinkProps {
+    href: string;
+    children: ReactNode;
+  }
+
+  const NavLink: React.FC<NavLinkProps> = ({ href, children }) => (
     <a href={href} className="block md:inline hover:text-gray-400 transition-colors duration-300">
       {children}
     </a>
   );
 
-  const scrollToContact = (event) => {
+  const scrollToContact = (event: MouseEvent<HTMLButtonElement>): void => {
     event.preventDefault();
     const contactSection = document.getElementById('contact');
     if (contactSection) {

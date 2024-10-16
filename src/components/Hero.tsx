@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
-export const Hero = () => {
-  const scrollToSection = (sectionId) => (event) => {
+export const Hero: React.FC = () => {
+  const scrollToSection = (sectionId: string) => (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     const section = document.getElementById(sectionId);
     if (section) {
@@ -24,7 +24,7 @@ export const Hero = () => {
         A full-stack developer
       </h1>
       <p className="mt-4 text-g text-gray-300 px-4 md:px-32">
-        I am a developer passionate about creating amazing web experiences, I specialize in React, NestJs, Typescrypt, Java and Python
+        I am a developer passionate about creating amazing web experiences, I specialize in React, NestJs, TypeScript, Java, and Python.
       </p>
       <div className="mt-8 space-x-4">
         <button 
@@ -41,5 +41,5 @@ export const Hero = () => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
