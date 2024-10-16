@@ -2,6 +2,7 @@ import React, { useState, useRef, ChangeEvent, FormEvent } from 'react';
 import emailjs from '@emailjs/browser';
 import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 
+
 export const Contact: React.FC = () => {
   const form = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({

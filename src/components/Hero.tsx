@@ -12,7 +12,7 @@ export const Hero: React.FC = () => {
   return (
     <div className="bg-black text-white text-center py-16">
       <img 
-        src="src/assets/img.png" 
+        src="\img.png" 
         alt="Juan Pablo Castaño Botero"
         className="mx-auto mb-8 w-48 h-48 object-cover transform transition-transform duration-300 hover:scale-105"
       />
