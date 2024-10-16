@@ -1,37 +1,39 @@
-import { useState, useRef } from 'react';
+import React, { useState, useRef, ChangeEvent, FormEvent } from 'react';
 import emailjs from '@emailjs/browser';
 import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 
-export const Contact = () => {
-  const form = useRef();
+export const Contact: React.FC = () => {
+  const form = useRef<HTMLFormElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: ''
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const [submitMessage, setSubmitMessage] = useState<string>('');
 
-  const handleChange = (e) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const sendEmail = (e) => {
+  const sendEmail = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    emailjs.sendForm('service_6icvtyq', 'template_wrubbo2', form.current, 'SD-gcTHU_hxq1RX36')
-      .then((result) => {
-        console.log(result.text);
-        setSubmitMessage('Message sent successfully!');
-        setFormData({ name: '', email: '', message: '' });
-      }, (error) => {
-        console.log(error.text);
-        setSubmitMessage('Failed to send message. Please try again.');
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-      });
+    if (form.current) {
+      emailjs.sendForm('service_6icvtyq', 'template_wrubbo2', form.current, 'SD-gcTHU_hxq1RX36')
+        .then((result) => {
+          console.log(result.text);
+          setSubmitMessage('Message sent successfully!');
+          setFormData({ name: '', email: '', message: '' });
+        }, (error) => {
+          console.log(error.text);
+          setSubmitMessage('Failed to send message. Please try again.');
+        })
+        .finally(() => {
+          setIsSubmitting(false);
+        });
+    }
   };
 
   return (
@@ -108,5 +110,5 @@ export const Contact = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
